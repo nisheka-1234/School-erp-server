@@ -1,4 +1,4 @@
-const Announcement = require("../../modules/announcementModule");
+const Announcement = require("../../modules/announcementmodule");
 
 /* SAVE ANNOUNCEMENT */
 const saveAnnouncement = async (req, res) => {
