@@ -3,7 +3,7 @@ const express = require("express");
 
 const app = express();
 app.use(cors());
-
+const PORT = process.env.PORT || 5000; 
 const dbconnect = require("./dbconnection");
 dbconnect();
 
@@ -54,6 +54,8 @@ app.use("/timetable", timetable);
 app.use("/announcement", announcement);
 
 
-app.listen(5000, () => {
-  console.log("Server running on port 5000");
+
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
