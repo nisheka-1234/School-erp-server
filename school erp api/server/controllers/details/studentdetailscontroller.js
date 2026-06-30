@@ -39,22 +39,23 @@ const savestudent = async (req, res) => {
     if (!Array.isArray(students)) {
       return res.status(400).send("Send array");
     }
+const created = await studentmodule.findOneAndUpdate(
+  { registernumber: s.regno },
+  {
+    studentname: s.name,
+    registernumber: s.regno,
+    username: s.username || "",
+    password: s.password || "",
+    classname: s.classname?.trim().toLowerCase()
+  },
+  {
+    upsert: true,
+    new: true
+  }
+);
 
-    const result = [];
-
-    for (const s of students) {
-      if (!s.name || !s.regno) continue;
-
-      const created = await studentmodule.create({
-        studentname: s.name,
-        registernumber: s.regno,
-        username: s.username || "",
-        password: s.password || "",
-        classname: s.classname?.trim().toLowerCase()
-      });
-
-      result.push(created);
-    }
+result.push(created);
+    
 
     return res.status(201).json({
       message: "Saved Successfully",
